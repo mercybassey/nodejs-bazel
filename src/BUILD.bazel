@@ -1,0 +1,12 @@
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+
+
+js_binary(
+    name = "index",
+    entry_point = "index.js",
+    data = [
+        ":index.js",
+        "//:node_modules_lib",
+    ],
+)
+

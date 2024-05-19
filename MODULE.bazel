@@ -1,0 +1,21 @@
+module(
+  name = "bazel_nodejs_demo",
+  version = "0.0.0",
+  compatibility_level = 1
+)
+
+bazel_dep(name = "aspect_rules_js", version = "1.42.1")
+# bazel_dep(name = "aspect_bazel_lib", version = "1.33.0")
+bazel_dep(name = "rules_nodejs", version = "6.0.1")  
+
+npm = use_extension(
+    "@aspect_rules_js//npm:extensions.bzl",
+    "npm",
+    dev_dependency = True,
+)
+
+use_repo(npm, "npm")
+
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+node.toolchain(node_version = "20.3.0")
+use_repo(node, "nodejs_toolchains")
